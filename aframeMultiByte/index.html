@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>aframeMultiByte</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="./js/aframe-html-shader.min.js"></script>
+    <script src="./js/html2canvas.min.js"></script>
+    <style>
+        .target{
+            width:500px;
+            height:100px;
+            font-size:20pt;
+            background:rgba(0,0,0,0);
+        }
+    </style>
+</head>
+<body>
+    <div id="target1" class="target">
+        <p>1.こんにちは世界(HTML Shader)🌝</p>
+    </div>
+
+    <a-scene>
+        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+        <a-sky color="#ECECEC"></a-sky>
+        
+        <a-plane position="-1.5 1.5 -1" width="2" height="0.5" material="shader:html;target: #target1;"></a-plane>
+
+        <a-entity mb-text position="1.5 1.5 -1" data-text="2.こんにちは世界(script)🌝"></a-entity>
+      </a-scene>
+</body>
+<script>
+function aframeMutlByte(){
+    document.querySelectorAll('[mb-text]:empty').forEach(mb_text=>{
+        console.log(mb_text.dataset.text)
+        const text  =mb_text.dataset.text
+        const text_cnt = text.length
+        const width = text_cnt*1.4
+        const height= 1.6
+        let cvs = document.createElement('canvas')
+        let ctx = cvs.getContext('2d')
+        cvs.width = width*100
+        cvs.height = height*100
+        ctx.fillStyle = "rgb(0, 0, 0)"
+        ctx.font = '100pt Arial'
+        ctx.fillText(text,0,125)
+
+        const base64 = cvs.toDataURL("image/png")
+        mb_text.innerHTML=`<a-image scale="${(width)/10} ${height/10} 1" src="${base64}"></a-image>`
+    })
+}
+    aframeMutlByte()
+</script>
+</html>

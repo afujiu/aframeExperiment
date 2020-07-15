@@ -7,6 +7,8 @@
     <script src="./js/html2canvas.min.js"></script>
     <style>
         .target{
+            z-index:0;
+            position:fixed;
             width:500px;
             height:100px;
             font-size:20pt;
@@ -18,7 +20,9 @@
     <div id="target1" class="target">
         <p>1.こんにちは世界(HTML Shader)🌝</p>
     </div>
-
+    <div id="target2" class="target">
+        <p>2重テスト</p>
+    </div>
     <a-scene>
         <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
         <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
@@ -26,7 +30,8 @@
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
         <a-sky color="#ECECEC"></a-sky>
         
-        <a-plane position="-1.5 1.5 -1" width="2" height="0.5" material="shader:html;target: #target1;"></a-plane>
+        <a-plane position="-1.5 2 -1" width="2" height="0.5" material="shader:html;target: #target1;"></a-plane>
+        <a-plane position="-1.5 1 -1" width="2" height="0.5" material="shader:html;target: #target2;"></a-plane>
 
         <a-entity mb-text position="1.5 1.5 -1" data-text="2.こんにちは世界(script)🌝"></a-entity>
       </a-scene>
